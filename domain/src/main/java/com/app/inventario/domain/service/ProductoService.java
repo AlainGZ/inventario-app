@@ -5,6 +5,7 @@ import com.app.inventario.domain.port.in.ProductoUseCase;
 import com.app.inventario.domain.port.out.ProductoRepository;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.List;
 
 public class ProductoService implements ProductoUseCase {
@@ -44,8 +45,8 @@ public class ProductoService implements ProductoUseCase {
 				.categoria(producto.getCategoria())
 				.precio(producto.getPrecio())
 				.stockMinimo(producto.getStockMinimo())
-				.creadoEn(producto.getCreadoEn())
-				.actualizadoEn(producto.getActualizadoEn())
+				.creadoEn(LocalDateTime.now())
+				.actualizadoEn(LocalDateTime.now())
 				.build();
 		return productoRepository.guardar(productoNuevo);
 
