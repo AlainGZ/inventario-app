@@ -8,5 +8,6 @@ public interface ProductoUseCase {
 
 	Producto agregarProducto(Producto producto);
 	List<Producto> obtenerTodos();
-
+	List<Producto> buscarPorCategoria(String categoria);
+	List<Producto> buscarPorNombre(String nombre);
 }

@@ -48,6 +48,21 @@ public class ProductoRepositoryAdapter implements ProductoRepository {
 		return jpaRepository.existsByNombre(nombre);
 	}
 
+	@Override
+	public List<Producto> buscarPorCategoria(String categoria){
+		return jpaRepository.findByCategoria(categoria)
+				.stream()
+				.map(this::toDomain)
+				.collect(Collectors.toList());
+	}
+
+	@Override
+	public List<Producto> buscarPorNombreContiene(String nombre){
+		return jpaRepository.findByNombreContainingIgnoreCase(nombre)
+				.stream()
+				.map(this::toDomain)
+				.collect(Collectors.toList());
+	}
 
 	private ProductoEntity toEntity(Producto producto){
 		return ProductoEntity.builder()

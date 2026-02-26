@@ -11,6 +11,8 @@ public interface ProductoRepository {
 	Optional<Producto> buscarPorId(Long id);
 	Optional<Producto> buscarPorNombre(String nombre);
 	List<Producto> buscarTodos();
+	List<Producto> buscarPorCategoria(String categoria);
+	List<Producto> buscarPorNombreContiene(String nombre);
 
 	boolean existePorNombre(String nombre);
 }

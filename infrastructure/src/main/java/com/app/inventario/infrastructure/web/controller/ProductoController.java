@@ -36,12 +36,25 @@ public class ProductoController {
 	}
 
 	@GetMapping
-	public ResponseEntity<List<ProductoResponseDTO>> obtenerTodos(){
-		List<ProductoResponseDTO> productos = productoUseCase.obtenerTodos()
-				.stream()
-				.map(this::toResponse)
-				.collect(Collectors.toList());
-		return ResponseEntity.ok(productos);
+	public ResponseEntity<List<ProductoResponseDTO>> obtenerTodos(
+			@RequestParam(required = false) String nombre,
+			@RequestParam(required = false) String categoria){
+
+		List<Producto> productos;
+
+		if (nombre != null && !nombre.isBlank()){
+			productos = productoUseCase.buscarPorNombre(nombre);
+		} else if (categoria != null && !categoria.isBlank()) {
+			productos = productoUseCase.buscarPorCategoria(categoria);
+		}else {
+			productos = productoUseCase.obtenerTodos();
+		}
+
+		return ResponseEntity.ok(
+				productos.stream()
+						.map(this::toResponse)
+						.collect(Collectors.toList())
+		);
 	}
 
 
@@ -53,6 +66,7 @@ public class ProductoController {
 				.precio(producto.getPrecio())
 				.stockMinimo(producto.getStockMinimo())
 				.creadoEn(producto.getCreadoEn())
+				.stockBajo(false)
 				.build();
 	}
 
