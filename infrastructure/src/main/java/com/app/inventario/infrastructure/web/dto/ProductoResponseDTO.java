@@ -17,5 +17,6 @@ public class ProductoResponseDTO {
 	private BigDecimal precio;
 	private Integer stockMinimo;
 	private LocalDateTime creadoEn;
+	private boolean stockBajo;
 
 }

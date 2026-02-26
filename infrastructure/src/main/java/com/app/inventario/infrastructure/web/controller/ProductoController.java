@@ -66,6 +66,7 @@ public class ProductoController {
 				.precio(producto.getPrecio())
 				.stockMinimo(producto.getStockMinimo())
 				.creadoEn(producto.getCreadoEn())
+				.stockBajo(false)
 				.build();
 	}
 
