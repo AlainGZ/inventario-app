@@ -57,5 +57,14 @@ public class ProductoService implements ProductoUseCase {
 		return productoRepository.buscarTodos();
 	}
 
+	@Override
+	public List<Producto> buscarPorCategoria(String categoria){
+		return productoRepository.buscarPorCategoria(categoria);
+	}
+
+	@Override
+	public List<Producto> buscarPorNombre(String nombre){
+		return productoRepository.buscarPorNombreContiene(nombre);
+	}
 
 }
