@@ -233,7 +233,7 @@ y **GitFlow** para el manejo de ramas.
 | HU-03 | Agregar producto | ✅ Terminado |
 | HU-06 | Registrar entrada | 🔲 Pendiente |
 | HU-07 | Registrar salida | 🔲 Pendiente |
-| HU-09 | Ver inventario actual | 🔲 Pendiente |
+| HU-09 | Ver inventario actual | ✅ Terminado |
 
 ---
 
