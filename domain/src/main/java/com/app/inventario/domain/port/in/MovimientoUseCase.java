@@ -6,4 +6,5 @@ public interface MovimientoUseCase {
 
 	Movimiento registrarEntrada(Long productoId, Integer cantidad, String motivo);
 
+	Movimiento registrarSalida(Long productoId, Integer cantidad, String motivo);
 }

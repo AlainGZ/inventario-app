@@ -1,6 +1,7 @@
 package com.app.inventario.infrastructure.config;
 
 import com.app.inventario.application.usecase.RegistrarEntradaUseCase;
+import com.app.inventario.application.usecase.RegistrarSalidaUseCase;
 import com.app.inventario.domain.model.Movimiento;
 import com.app.inventario.domain.port.in.MovimientoUseCase;
 import com.app.inventario.domain.port.in.ProductoUseCase;
@@ -28,6 +29,11 @@ public class BeanConfiguration {
 	@Bean
 	public RegistrarEntradaUseCase registrarEntradaUseCase(MovimientoUseCase movimientoUseCase){
 		return new RegistrarEntradaUseCase(movimientoUseCase);
+	}
+
+	@Bean
+	public RegistrarSalidaUseCase registrarSalidaUseCase(MovimientoUseCase movimientoUseCase){
+		return new RegistrarSalidaUseCase(movimientoUseCase);
 	}
 
 }

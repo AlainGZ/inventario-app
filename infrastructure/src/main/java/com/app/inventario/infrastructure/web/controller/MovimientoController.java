@@ -1,6 +1,7 @@
 package com.app.inventario.infrastructure.web.controller;
 
 import com.app.inventario.application.usecase.RegistrarEntradaUseCase;
+import com.app.inventario.application.usecase.RegistrarSalidaUseCase;
 import com.app.inventario.domain.model.Movimiento;
 import com.app.inventario.domain.port.out.MovimientoRepository;
 import com.app.inventario.infrastructure.web.dto.MovimientoRequestDTO;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class MovimientoController {
 
 	private final RegistrarEntradaUseCase registrarEntradaUseCase;
+	private final RegistrarSalidaUseCase registrarSalidaUseCase;
 	private final MovimientoRepository movimientoRepository;
 
 	@PostMapping("/entrada")
@@ -38,6 +40,23 @@ public class MovimientoController {
 				.status(HttpStatus.CREATED)
 				.body(toResponse(movimiento, stockActual));
 
+	}
+
+	@PostMapping("/salida")
+	public ResponseEntity<MovimientoResponseDTO> registrarSalida(
+			@Valid @RequestBody MovimientoRequestDTO request){
+
+		Movimiento movimiento = registrarSalidaUseCase.ejecutar(
+				request.getProductoId(),
+				request.getCantidad(),
+				request.getMotivo()
+		);
+
+		Integer stockActual = movimientoRepository.calcularStockActual(request.getProductoId());
+
+		return ResponseEntity
+				.status(HttpStatus.CREATED)
+				.body(toResponse(movimiento, stockActual));
 	}
 
 	private MovimientoResponseDTO toResponse(Movimiento movimiento, Integer stockActual){
