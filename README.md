@@ -88,6 +88,13 @@ El stock actual de cada producto **no se guarda** como un número en la
 tabla de productos. Se calcula sumando todas las entradas y restando
 todas las salidas del historial de movimientos.
 
+### Validación de stock insuficiente
+
+Antes de registrar una salida el sistema calcula el stock actual 
+sumando todas las entradas y restando todas las salidas previas. 
+Si la cantidad solicitada supera el stock disponible, la operación 
+se rechaza con un error 409.
+
 **¿Por qué?**
 Si el stock fuera un número guardado, una falla a mitad de una
 operación podría dejarlo inconsistente sin forma de recuperarlo.
@@ -187,7 +194,8 @@ La aplicación queda disponible en `http://localhost:8080`
 |--------|-----|-------------|
 | POST | `/api/productos` | Agregar un producto |
 | GET | `/api/productos` | Listar todos los productos |
-| POST | '/api/movimientos/entrada' | Registrar entrada de stock |
+| POST | `/api/movimientos/entrada` | Registrar entrada de stock |
+| POST | `/api/movimientos/salida` | Registrar salida de stock |
 
 ### Ejemplo de request
 ```json
@@ -233,7 +241,7 @@ y **GitFlow** para el manejo de ramas.
 | HU-02 | Logout | 🔲 Pendiente |
 | HU-03 | Agregar producto | ✅ Terminado |
 | HU-06 | Registrar entrada | ✅ Terminado |
-| HU-07 | Registrar salida | 🔲 Pendiente |
+| HU-07 | Registrar salida | ✅ Terminado |
 | HU-09 | Ver inventario actual | ✅ Terminado |
 
 ---
