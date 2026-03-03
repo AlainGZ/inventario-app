@@ -121,7 +121,7 @@ PRODUCTO
 ├── creado_en
 └── actualizado_en
 
-MOVIMIENTO (próximo sprint)
+MOVIMIENTO 
 ├── id
 ├── tipo          (ENTRADA / SALIDA)
 ├── cantidad
@@ -187,6 +187,7 @@ La aplicación queda disponible en `http://localhost:8080`
 |--------|-----|-------------|
 | POST | `/api/productos` | Agregar un producto |
 | GET | `/api/productos` | Listar todos los productos |
+| POST | '/api/movimientos/entrada' | Registrar entrada de stock |
 
 ### Ejemplo de request
 ```json
@@ -231,7 +232,7 @@ y **GitFlow** para el manejo de ramas.
 | HU-01 | Login de administrador | 🔲 Pendiente |
 | HU-02 | Logout | 🔲 Pendiente |
 | HU-03 | Agregar producto | ✅ Terminado |
-| HU-06 | Registrar entrada | 🔲 Pendiente |
+| HU-06 | Registrar entrada | ✅ Terminado |
 | HU-07 | Registrar salida | 🔲 Pendiente |
 | HU-09 | Ver inventario actual | ✅ Terminado |
 
