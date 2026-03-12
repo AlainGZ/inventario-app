@@ -17,7 +17,7 @@ public class UsuarioRepositoryAdapter implements UsuarioRepository {
 
 	@Override
 	public Optional<Usuario> buscarPorUsername(String username){
-		return jpaRepository.findByUserName(username)
+		return jpaRepository.findByUsername(username)
 				.map(this::toDomain);
 	}
 
