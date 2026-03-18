@@ -190,13 +190,14 @@ La aplicación queda disponible en `http://localhost:8080`
 
 ### Productos
 
-| Método | URL | Descripción |
-|--------|-----|-------------|
-| POST   | `/api/productos` | Agregar un producto |
-| GET    | `/api/productos` | Listar todos los productos |
+| Método | URL                        | Descripción                |
+|--------|----------------------------|----------------------------|
+| POST   | `/api/productos`           | Agregar un producto        |
+| GET    | `/api/productos`           | Listar todos los productos |
 | POST   | `/api/movimientos/entrada` | Registrar entrada de stock |
-| POST   | `/api/movimientos/salida` | Registrar salida de stock |
-| POST   | `/api/auth/login` | Login, retorna token JWT |
+| POST   | `/api/movimientos/salida`  | Registrar salida de stock  |
+| POST   | `/api/auth/login`          | Login, retorna token JWT   |
+| POST   | `/api/auth/logout`         | Logout, invalida el token    |
 
 ### Ejemplo de request
 ```json
@@ -234,16 +235,16 @@ y **GitFlow** para el manejo de ramas.
 
 ### Estado actual
 
-**Sprint 1 en curso**
+**Sprint 1 completado**
 
-| HU | Descripción | Estado       |
-|----|-------------|--------------|
-| HU-01 | Login de administrador | ✅ Terminado |
-| HU-02 | Logout | 🔲 Pendiente |
-| HU-03 | Agregar producto | ✅ Terminado  |
-| HU-06 | Registrar entrada | ✅ Terminado  |
-| HU-07 | Registrar salida | ✅ Terminado  |
-| HU-09 | Ver inventario actual | ✅ Terminado  |
+| HU | Descripción | Estado    |
+|----|-------------|-----------|
+| HU-01 | Login de administrador | Terminado |
+| HU-02 | Logout | Terminado |
+| HU-03 | Agregar producto | Terminado |
+| HU-06 | Registrar entrada | Terminado |
+| HU-07 | Registrar salida | Terminado |
+| HU-09 | Ver inventario actual | Terminado |
 
 ---
 
