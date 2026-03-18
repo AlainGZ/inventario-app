@@ -4,4 +4,6 @@ public interface AuthUseCase {
 
 	String login(String username, String password);
 
+	void logout(String token);
+
 }

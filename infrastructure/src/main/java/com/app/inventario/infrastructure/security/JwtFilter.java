@@ -1,15 +1,14 @@
 package com.app.inventario.infrastructure.security;
 
+import com.app.inventario.domain.port.out.TokenBlacklist;
 import com.app.inventario.domain.port.out.UsuarioRepository;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
@@ -23,6 +22,7 @@ public class JwtFilter extends OncePerRequestFilter {
 
 	private final JwtUtil jwtUtil;
 	private final UsuarioRepository usuarioRepository;
+	private final TokenBlacklist tokenBlacklist;
 
 	@Override
 	protected void doFilterInternal(HttpServletRequest request,
@@ -40,6 +40,11 @@ public class JwtFilter extends OncePerRequestFilter {
 
 		if (!jwtUtil.validarToken(token)){
 			filterChain.doFilter(request, response);
+			return;
+		}
+
+		if (tokenBlacklist.contiene(token)){
+			filterChain.doFilter(request,response);
 			return;
 		}
 
