@@ -190,14 +190,17 @@ La aplicación queda disponible en `http://localhost:8080`
 
 ### Productos
 
-| Método | URL                        | Descripción                |
-|--------|----------------------------|----------------------------|
-| POST   | `/api/productos`           | Agregar un producto        |
-| GET    | `/api/productos`           | Listar todos los productos |
-| POST   | `/api/movimientos/entrada` | Registrar entrada de stock |
-| POST   | `/api/movimientos/salida`  | Registrar salida de stock  |
-| POST   | `/api/auth/login`          | Login, retorna token JWT   |
-| POST   | `/api/auth/logout`         | Logout, invalida el token    |
+| Método | URL                                | Descripción                  |
+|--------|------------------------------------|------------------------------|
+| POST   | `/api/productos`                   | Agregar un producto          |
+| GET    | `/api/productos`                   | Listar todos los productos   |
+| POST   | `/api/movimientos/entrada`         | Registrar entrada de stock   |
+| POST   | `/api/movimientos/salida`          | Registrar salida de stock    |
+| POST   | `/api/auth/login`                  | Login, retorna token JWT     |
+| POST   | `/api/auth/logout`                 | Logout, invalida el token    |
+| POST   | `/api/movimientos`                 | Ver historial de movimientos |
+| POST   | `/api/movimientos?productoId=1`    | Filtrar por producto         |
+| POST   | `/api/movimientos?fecha=2026-03-03` | Filtrar por fecha            |
 
 ### Ejemplo de request
 ```json
@@ -245,6 +248,12 @@ y **GitFlow** para el manejo de ramas.
 | HU-06 | Registrar entrada | Terminado |
 | HU-07 | Registrar salida | Terminado |
 | HU-09 | Ver inventario actual | Terminado |
+
+**Sprint 2 en curso**
+
+| HU    | Descripción                  | Estado    |
+|-------|------------------------------|-----------|
+| HU-08 | Ver historial de movimientos | Terminado |
 
 ---
 
