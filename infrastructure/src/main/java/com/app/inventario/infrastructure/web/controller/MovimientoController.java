@@ -3,17 +3,20 @@ package com.app.inventario.infrastructure.web.controller;
 import com.app.inventario.application.usecase.RegistrarEntradaUseCase;
 import com.app.inventario.application.usecase.RegistrarSalidaUseCase;
 import com.app.inventario.domain.model.Movimiento;
+import com.app.inventario.domain.port.in.MovimientoUseCase;
 import com.app.inventario.domain.port.out.MovimientoRepository;
 import com.app.inventario.infrastructure.web.dto.MovimientoRequestDTO;
 import com.app.inventario.infrastructure.web.dto.MovimientoResponseDTO;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.time.LocalDate;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/movimientos")
@@ -23,6 +26,7 @@ public class MovimientoController {
 	private final RegistrarEntradaUseCase registrarEntradaUseCase;
 	private final RegistrarSalidaUseCase registrarSalidaUseCase;
 	private final MovimientoRepository movimientoRepository;
+	private final MovimientoUseCase movimientoUseCase;
 
 	@PostMapping("/entrada")
 	public ResponseEntity<MovimientoResponseDTO> registrarEntrada(
@@ -58,6 +62,21 @@ public class MovimientoController {
 				.status(HttpStatus.CREATED)
 				.body(toResponse(movimiento, stockActual));
 	}
+
+	@GetMapping
+	public ResponseEntity<List<MovimientoResponseDTO>> consultarHistorial(
+			@RequestParam(required = false) Long productoId,
+			@RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)LocalDate fecha){
+
+		List<Movimiento> movimientos = movimientoUseCase.consultarHistorial(productoId, fecha);
+
+		List<MovimientoResponseDTO> response = movimientos.stream()
+				.map(m -> toResponse(m, movimientoRepository.calcularStockActual(m.getProductoId())))
+				.collect(Collectors.toList());
+
+		return ResponseEntity.ok(response);
+	}
+
 
 	private MovimientoResponseDTO toResponse(Movimiento movimiento, Integer stockActual){
 

@@ -6,7 +6,10 @@ import com.app.inventario.domain.port.in.MovimientoUseCase;
 import com.app.inventario.domain.port.out.MovimientoRepository;
 import com.app.inventario.domain.port.out.ProductoRepository;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class MovimientoService implements MovimientoUseCase {
 
@@ -78,6 +81,28 @@ public class MovimientoService implements MovimientoUseCase {
 				.build();
 
 		return movimientoRepository.guardar(movimiento);
+
+	}
+
+	@Override
+	public List<Movimiento> consultarHistorial(Long productoId, LocalDate fecha){
+
+		if (productoId != null && fecha != null){
+			return movimientoRepository.buscarPorProductoId(productoId)
+					.stream()
+					.filter(m -> m.getFecha().toLocalDate().equals(fecha))
+					.collect(Collectors.toList());
+		}
+
+		if (productoId != null){
+			return movimientoRepository.buscarPorProductoId(productoId);
+		}
+
+		if (fecha != null){
+			return movimientoRepository.buscarPorFecha(fecha);
+		}
+
+		return movimientoRepository.buscarTodos();
 
 	}
 
