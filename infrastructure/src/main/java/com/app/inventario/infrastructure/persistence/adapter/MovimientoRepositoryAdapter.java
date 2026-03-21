@@ -10,6 +10,7 @@ import com.app.inventario.infrastructure.persistence.repository.MovimientoJpaRep
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -28,7 +29,7 @@ public class MovimientoRepositoryAdapter implements MovimientoRepository {
 
 	@Override
 	public List<Movimiento> buscarPorProductoId(Long productoId){
-		return jpaRepository.findByProductoId(productoId)
+		return jpaRepository.findByProductoIdOrderByFechaDesc(productoId)
 				.stream()
 				.map(this::toDomain)
 				.collect(Collectors.toList());
@@ -40,6 +41,21 @@ public class MovimientoRepositoryAdapter implements MovimientoRepository {
 		return jpaRepository.calcularStockActual(productoId);
 	}
 
+	@Override
+	public List<Movimiento> buscarTodos(){
+		return jpaRepository.findAllByOrderByFechaDesc()
+				.stream()
+				.map(this::toDomain)
+				.collect(Collectors.toList());
+	}
+
+	@Override
+	public List<Movimiento> buscarPorFecha(LocalDate fecha){
+		return jpaRepository.findByFecha(fecha)
+				.stream()
+				.map(this::toDomain)
+				.collect(Collectors.toList());
+	}
 
 	private MovimientoEntity toEntity(Movimiento movimiento){
 		ProductoEntity productoEntity = new ProductoEntity();
