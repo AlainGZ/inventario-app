@@ -2,6 +2,7 @@ package com.app.inventario.infrastructure.web.controller;
 
 import com.app.inventario.domain.model.Producto;
 import com.app.inventario.domain.port.in.ProductoUseCase;
+import com.app.inventario.domain.port.out.MovimientoRepository;
 import com.app.inventario.infrastructure.web.dto.ProductoRequestDTO;
 import com.app.inventario.infrastructure.web.dto.ProductoResponseDTO;
 import jakarta.validation.Valid;
@@ -19,6 +20,7 @@ import java.util.stream.Collectors;
 public class ProductoController {
 
 	private final ProductoUseCase productoUseCase;
+	private final MovimientoRepository movimientoRepository;
 
 	@PostMapping
 	public ResponseEntity<ProductoResponseDTO> agregar(@Valid @RequestBody ProductoRequestDTO request){
@@ -59,6 +61,9 @@ public class ProductoController {
 
 
 	private ProductoResponseDTO toResponse(Producto producto){
+
+		Integer stockActual = movimientoRepository.calcularStockActual(producto.getId());
+
 		return ProductoResponseDTO.builder()
 				.id(producto.getId())
 				.nombre(producto.getNombre())
@@ -66,7 +71,8 @@ public class ProductoController {
 				.precio(producto.getPrecio())
 				.stockMinimo(producto.getStockMinimo())
 				.creadoEn(producto.getCreadoEn())
-				.stockBajo(false)
+				.stockBajo(stockActual <= producto.getStockMinimo())
+				.stockActual(stockActual)
 				.build();
 	}
 

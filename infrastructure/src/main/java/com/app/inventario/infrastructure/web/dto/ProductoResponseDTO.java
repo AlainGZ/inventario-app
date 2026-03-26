@@ -18,5 +18,5 @@ public class ProductoResponseDTO {
 	private Integer stockMinimo;
 	private LocalDateTime creadoEn;
 	private boolean stockBajo;
-
+    private Integer stockActual;
 }
