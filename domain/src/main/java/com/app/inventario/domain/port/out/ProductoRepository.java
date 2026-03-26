@@ -13,6 +13,7 @@ public interface ProductoRepository {
 	List<Producto> buscarTodos();
 	List<Producto> buscarPorCategoria(String categoria);
 	List<Producto> buscarPorNombreContiene(String nombre);
+	Producto actualizar(Producto producto);
 
 	boolean existePorNombre(String nombre);
 }

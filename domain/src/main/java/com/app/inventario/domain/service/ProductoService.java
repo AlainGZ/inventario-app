@@ -67,4 +67,24 @@ public class ProductoService implements ProductoUseCase {
 		return productoRepository.buscarPorNombreContiene(nombre);
 	}
 
+	@Override
+	public Producto actualizarProducto(Long id, String nombre, String categoria, BigDecimal precio, Integer stockMinimo){
+
+		Producto productoExistente = productoRepository.buscarPorId(id).orElseThrow(() -> new IllegalArgumentException("No existe un producto con id: "+id));
+
+		Producto productoActualizado = Producto.builder()
+				.id(productoExistente.getId())
+				.nombre(nombre)
+				.categoria(categoria)
+				.precio(precio)
+				.stockMinimo(stockMinimo)
+				.creadoEn(productoExistente.getCreadoEn())
+				.actualizadoEn(LocalDateTime.now())
+				.build();
+
+		return productoRepository.actualizar(productoActualizado);
+
+
+	}
+
 }

@@ -59,6 +59,21 @@ public class ProductoController {
 		);
 	}
 
+	@PutMapping("/{id}")
+	public ResponseEntity<ProductoResponseDTO> actualizarProducto(@PathVariable Long id, @Valid @RequestBody ProductoRequestDTO request){
+
+		Producto producto = productoUseCase.actualizarProducto(
+				id,
+				request.getNombre(),
+				request.getCategoria(),
+				request.getPrecio(),
+				request.getStockMinimo()
+		);
+
+		return ResponseEntity.ok(toResponse(producto));
+
+	}
+
 
 	private ProductoResponseDTO toResponse(Producto producto){
 
