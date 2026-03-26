@@ -64,6 +64,12 @@ public class ProductoRepositoryAdapter implements ProductoRepository {
 				.collect(Collectors.toList());
 	}
 
+	@Override
+	public Producto actualizar(Producto producto){
+		ProductoEntity entity = toEntity(producto);
+		return toDomain(jpaRepository.save(entity));
+	}
+
 	private ProductoEntity toEntity(Producto producto){
 		return ProductoEntity.builder()
 				.id(producto.getId())
