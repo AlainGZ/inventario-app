@@ -115,6 +115,12 @@ manualmente en `BeanConfiguration` que vive en infrastructure.
 Así el dominio permanece como Java puro sin ninguna dependencia
 de frameworks externos.
 
+### Stock actual y alerta de stock mínimo
+El stock actual no se guarda en la tabla productos sino que se
+calcula en tiempo real sumando entradas y restando salidas del
+historial de movimientos. El campo stockBajo es true cuando el
+stock actual es menor o igual al stock mínimo definido por producto.
+
 ---
 
 ## Modelo de datos
@@ -240,21 +246,22 @@ y **GitFlow** para el manejo de ramas.
 
 **Sprint 1 completado**
 
-| HU | Descripción | Estado    |
-|----|-------------|-----------|
+| HU    | Descripción            | Estado    |
+|-------|------------------------|-----------|
 | HU-01 | Login de administrador | Terminado |
-| HU-02 | Logout | Terminado |
-| HU-03 | Agregar producto | Terminado |
-| HU-06 | Registrar entrada | Terminado |
-| HU-07 | Registrar salida | Terminado |
-| HU-09 | Ver inventario actual | Terminado |
+| HU-02 | Logout                 | Terminado |
+| HU-03 | Agregar producto       | Terminado |
+| HU-06 | Registrar entrada      | Terminado |
+| HU-07 | Registrar salida       | Terminado |
+| HU-09 | Ver inventario actual  | Terminado |
+
 
 **Sprint 2 en curso**
 
 | HU    | Descripción                  | Estado    |
 |-------|------------------------------|-----------|
 | HU-08 | Ver historial de movimientos | Terminado |
-
+| HU-10  | Alerta de stock minimo | Terminado |
 ---
 
 ## Autor
