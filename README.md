@@ -196,17 +196,18 @@ La aplicación queda disponible en `http://localhost:8080`
 
 ### Productos
 
-| Método | URL                                | Descripción                  |
-|--------|------------------------------------|------------------------------|
-| POST   | `/api/productos`                   | Agregar un producto          |
-| GET    | `/api/productos`                   | Listar todos los productos   |
-| POST   | `/api/movimientos/entrada`         | Registrar entrada de stock   |
-| POST   | `/api/movimientos/salida`          | Registrar salida de stock    |
-| POST   | `/api/auth/login`                  | Login, retorna token JWT     |
-| POST   | `/api/auth/logout`                 | Logout, invalida el token    |
-| POST   | `/api/movimientos`                 | Ver historial de movimientos |
-| POST   | `/api/movimientos?productoId=1`    | Filtrar por producto         |
-| POST   | `/api/movimientos?fecha=2026-03-03` | Filtrar por fecha            |
+| Método | URL                                 | Descripción                  |
+|--------|-------------------------------------|------------------------------|
+| POST   | `/api/productos`                    | Agregar un producto          |
+| GET    | `/api/productos`                    | Listar todos los productos   |
+| POST   | `/api/movimientos/entrada`          | Registrar entrada de stock   |
+| POST   | `/api/movimientos/salida`           | Registrar salida de stock    |
+| POST   | `/api/auth/login`                   | Login, retorna token JWT     |
+| POST   | `/api/auth/logout`                  | Logout, invalida el token    |
+| GET    | `/api/movimientos`                  | Ver historial de movimientos |
+| GET    | `/api/movimientos?productoId=1`     | Filtrar por producto         |
+| GET    | `/api/movimientos?fecha=2026-03-03` | Filtrar por fecha            |
+| PUT    | `/api/productos/{id}`               | Editar Producto              |
 
 ### Ejemplo de request
 ```json
@@ -261,7 +262,8 @@ y **GitFlow** para el manejo de ramas.
 | HU    | Descripción                  | Estado    |
 |-------|------------------------------|-----------|
 | HU-08 | Ver historial de movimientos | Terminado |
-| HU-10  | Alerta de stock minimo | Terminado |
+| HU-10 | Alerta de stock minimo       | Terminado |
+| HU-04 | Editar producto              | Terminado |
 ---
 
 ## Autor
