@@ -208,6 +208,7 @@ La aplicación queda disponible en `http://localhost:8080`
 | GET    | `/api/movimientos?productoId=1`     | Filtrar por producto         |
 | GET    | `/api/movimientos?fecha=2026-03-03` | Filtrar por fecha            |
 | PUT    | `/api/productos/{id}`               | Editar Producto              |
+| DELETE | `/api/productos/{id}` | Eliminar producto (borrado lógico) |
 
 ### Ejemplo de request
 ```json
@@ -264,6 +265,7 @@ y **GitFlow** para el manejo de ramas.
 | HU-08 | Ver historial de movimientos | Terminado |
 | HU-10 | Alerta de stock minimo       | Terminado |
 | HU-04 | Editar producto              | Terminado |
+| HU-05 | Eliminar producto | Terminado |
 ---
 
 ## Autor
