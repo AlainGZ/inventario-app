@@ -37,4 +37,6 @@ public class ProductoEntity {
 	@Column(name = "actualizado_en")
 	private LocalDateTime actualizadoEn;
 
+	@Column(nullable = false)
+	private Boolean activo = true;
 }

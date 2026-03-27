@@ -74,6 +74,12 @@ public class ProductoController {
 
 	}
 
+	@DeleteMapping("/{id}")
+	public ResponseEntity<Void> eliminarProducto(@PathVariable Long id){
+		productoUseCase.desactivarProducto(id);
+		return ResponseEntity.noContent().build();
+	}
+
 
 	private ProductoResponseDTO toResponse(Producto producto){
 

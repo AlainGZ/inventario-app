@@ -47,6 +47,7 @@ public class ProductoService implements ProductoUseCase {
 				.stockMinimo(producto.getStockMinimo())
 				.creadoEn(LocalDateTime.now())
 				.actualizadoEn(LocalDateTime.now())
+				.activo(true)
 				.build();
 		return productoRepository.guardar(productoNuevo);
 
@@ -54,17 +55,17 @@ public class ProductoService implements ProductoUseCase {
 
 	@Override
 	public List<Producto> obtenerTodos(){
-		return productoRepository.buscarTodos();
+		return productoRepository.buscarTodosActivos();
 	}
 
 	@Override
 	public List<Producto> buscarPorCategoria(String categoria){
-		return productoRepository.buscarPorCategoria(categoria);
+		return productoRepository.buscarPorCategoriaActivos(categoria);
 	}
 
 	@Override
 	public List<Producto> buscarPorNombre(String nombre){
-		return productoRepository.buscarPorNombreContiene(nombre);
+		return productoRepository.buscarPorNombreContieneActivos(nombre);
 	}
 
 	@Override
@@ -80,11 +81,29 @@ public class ProductoService implements ProductoUseCase {
 				.stockMinimo(stockMinimo)
 				.creadoEn(productoExistente.getCreadoEn())
 				.actualizadoEn(LocalDateTime.now())
+				.activo(productoExistente.getActivo())
 				.build();
 
 		return productoRepository.actualizar(productoActualizado);
 
 
+	}
+
+	@Override
+	public void desactivarProducto(Long id){
+		Producto producto = productoRepository.buscarPorId(id).orElseThrow(() -> new IllegalArgumentException("No existe un producto con id: "+id));
+
+		Producto productoDesactivado = Producto.builder()
+				.id(producto.getId())
+				.nombre(producto.getNombre())
+				.categoria(producto.getCategoria())
+				.precio(producto.getPrecio())
+				.stockMinimo(producto.getStockMinimo())
+				.creadoEn(producto.getCreadoEn())
+				.actualizadoEn(LocalDateTime.now())
+				.activo(false)
+				.build();
+		productoRepository.actualizar(productoDesactivado);
 	}
 
 }
