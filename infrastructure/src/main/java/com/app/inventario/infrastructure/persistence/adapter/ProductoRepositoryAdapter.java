@@ -36,8 +36,8 @@ public class ProductoRepositoryAdapter implements ProductoRepository {
 	}
 
 	@Override
-	public List<Producto> buscarTodos(){
-		return jpaRepository.findAll()
+	public List<Producto> buscarTodosActivos(){
+		return jpaRepository.findByActivoTrueOrderByNombreAsc()
 				.stream()
 				.map(this::toDomain)
 				.collect(Collectors.toList());
@@ -49,16 +49,16 @@ public class ProductoRepositoryAdapter implements ProductoRepository {
 	}
 
 	@Override
-	public List<Producto> buscarPorCategoria(String categoria){
-		return jpaRepository.findByCategoria(categoria)
+	public List<Producto> buscarPorCategoriaActivos(String categoria){
+		return jpaRepository.findByActivoTrueAndCategoriaContainingIgnoreCase(categoria)
 				.stream()
 				.map(this::toDomain)
 				.collect(Collectors.toList());
 	}
 
 	@Override
-	public List<Producto> buscarPorNombreContiene(String nombre){
-		return jpaRepository.findByNombreContainingIgnoreCase(nombre)
+	public List<Producto> buscarPorNombreContieneActivos(String nombre){
+		return jpaRepository.findByActivoTrueAndNombreContainingIgnoreCase(nombre)
 				.stream()
 				.map(this::toDomain)
 				.collect(Collectors.toList());
@@ -70,6 +70,8 @@ public class ProductoRepositoryAdapter implements ProductoRepository {
 		return toDomain(jpaRepository.save(entity));
 	}
 
+
+
 	private ProductoEntity toEntity(Producto producto){
 		return ProductoEntity.builder()
 				.id(producto.getId())
@@ -79,6 +81,7 @@ public class ProductoRepositoryAdapter implements ProductoRepository {
 				.stockMinimo(producto.getStockMinimo())
 				.creadoEn(producto.getCreadoEn())
 				.actualizadoEn(producto.getActualizadoEn())
+				.activo(producto.getActivo())
 				.build();
 	}
 
@@ -91,6 +94,7 @@ public class ProductoRepositoryAdapter implements ProductoRepository {
 				.stockMinimo(entity.getStockMinimo())
 				.creadoEn(entity.getCreadoEn())
 				.actualizadoEn(entity.getActualizadoEn())
+				.activo(entity.getActivo())
 				.build();
 	}
 

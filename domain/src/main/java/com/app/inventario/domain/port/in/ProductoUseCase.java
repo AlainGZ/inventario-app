@@ -12,4 +12,5 @@ public interface ProductoUseCase {
 	List<Producto> buscarPorCategoria(String categoria);
 	List<Producto> buscarPorNombre(String nombre);
 	Producto actualizarProducto(Long id, String nombre, String categoria, BigDecimal precio, Integer stockMinimo);
+	void desactivarProducto(Long id);
 }
