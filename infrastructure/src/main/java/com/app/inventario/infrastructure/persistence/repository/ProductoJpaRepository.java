@@ -16,4 +16,9 @@ public interface ProductoJpaRepository extends JpaRepository<ProductoEntity, Lon
 
 	List<ProductoEntity> findByNombreContainingIgnoreCase(String nombre);
 
+	List<ProductoEntity> findByActivoTrueOrderByNombreAsc();
+
+	List<ProductoEntity> findByActivoTrueAndCategoriaContainingIgnoreCase(String categoria);
+
+	List<ProductoEntity> findByActivoTrueAndNombreContainingIgnoreCase(String nombre);
 }

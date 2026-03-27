@@ -21,5 +21,6 @@ public class Producto {
 	private Integer stockMinimo;
 	private LocalDateTime creadoEn;
 	private LocalDateTime actualizadoEn;
+	private Boolean activo;
 
 }
