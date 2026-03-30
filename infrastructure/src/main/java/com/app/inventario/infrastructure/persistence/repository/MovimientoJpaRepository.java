@@ -21,4 +21,15 @@ public interface MovimientoJpaRepository extends JpaRepository<MovimientoEntity,
 
 	List<MovimientoEntity> findAllByOrderByFechaDesc();
 
+	@Query("SELECT COALESCE(SUM(m.cantidad), 0) FROM MovimientoEntity m WHERE m.tipo = 'ENTRADA'")
+	Integer totalEntradas();
+
+	@Query("SELECT COALESCE(SUM(m.cantidad), 0) FROM MovimientoEntity m WHERE m.tipo = 'SALIDA'")
+	Integer totalSalidas();
+
+	@Query("SELECT m.producto.id FROM MovimientoEntity m " +
+			"GROUP BY m.producto.id " +
+			"ORDER BY COUNT(m.id) DESC " +
+			"LIMIT 1")
+	Long idProductoConMasMovimientos();
 }

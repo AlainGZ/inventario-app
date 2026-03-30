@@ -4,13 +4,14 @@ import com.app.inventario.application.usecase.RegistrarEntradaUseCase;
 import com.app.inventario.application.usecase.RegistrarSalidaUseCase;
 import com.app.inventario.domain.model.Movimiento;
 import com.app.inventario.domain.port.in.AuthUseCase;
+import com.app.inventario.domain.port.in.EstadisticasUseCase;
 import com.app.inventario.domain.port.in.MovimientoUseCase;
 import com.app.inventario.domain.port.in.ProductoUseCase;
 import com.app.inventario.domain.port.out.*;
 import com.app.inventario.domain.service.AuthService;
+import com.app.inventario.domain.service.EstadisticasService;
 import com.app.inventario.domain.service.MovimientoService;
 import com.app.inventario.domain.service.ProductoService;
-import com.app.inventario.infrastructure.web.dto.ProductoResponseDTO;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -42,4 +43,8 @@ public class BeanConfiguration {
 		return new AuthService(usuarioRepository, tokenGenerator, tokenBlacklist);
 	}
 
+	@Bean
+	public EstadisticasUseCase estadisticasUseCase(EstadisticasRepository estadisticasRepository){
+		return new EstadisticasService(estadisticasRepository);
+	}
 }
