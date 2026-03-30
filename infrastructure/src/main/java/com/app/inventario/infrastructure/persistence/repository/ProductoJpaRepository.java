@@ -21,4 +21,6 @@ public interface ProductoJpaRepository extends JpaRepository<ProductoEntity, Lon
 	List<ProductoEntity> findByActivoTrueAndCategoriaContainingIgnoreCase(String categoria);
 
 	List<ProductoEntity> findByActivoTrueAndNombreContainingIgnoreCase(String nombre);
+
+	Integer countByActivoTrue();
 }

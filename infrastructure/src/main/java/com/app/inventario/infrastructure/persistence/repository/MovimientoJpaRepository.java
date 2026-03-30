@@ -10,6 +10,8 @@ import java.util.List;
 
 public interface MovimientoJpaRepository extends JpaRepository<MovimientoEntity, Long> {
 
+	List<MovimientoEntity> findByProductoId(Long productoId);
+
 	@Query("SELECT COALESCE(SUM(CASE WHEN m.tipo = 'ENTRADA' THEN m.cantidad ELSE -m.cantidad END), 0) " +
 			"FROM MovimientoEntity m WHERE m.producto.id = :productoId")
 	Integer calcularStockActual(@Param("productoId") Long prductoId);
@@ -21,4 +23,15 @@ public interface MovimientoJpaRepository extends JpaRepository<MovimientoEntity,
 
 	List<MovimientoEntity> findAllByOrderByFechaDesc();
 
+	@Query("SELECT COALESCE(SUM(m.cantidad), 0) FROM MovimientoEntity m WHERE m.tipo = 'ENTRADA'")
+	Integer totalEntradas();
+
+	@Query("SELECT COALESCE(SUM(m.cantidad), 0) FROM MovimientoEntity m WHERE m.tipo = 'SALIDA'")
+	Integer totalSalidas();
+
+	@Query("SELECT m.producto.id FROM MovimientoEntity m " +
+			"GROUP BY m.producto.id " +
+			"ORDER BY COUNT(m.id) DESC " +
+			"LIMIT 1")
+	Long idProductoConMasMovimientos();
 }
